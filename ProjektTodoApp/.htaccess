@@ -1,0 +1,17 @@
+ # alle Anfragen an den Server sollen durch unsere index.php geleitet werden,
+ # außer es handelt sich um echte Dateien auf den Server  
+
+ # handelt sich eingebener Pfad um Datei auf dem Server? => RewriteCond %{REQUEST_FILENAME} !-f 
+ # handelt sich eingebener Pfad um einen Ordner auf dem Server? => RewriteCond %{REQUEST_FILENAME} !-d
+ # alles auf index.php leiten =>  Regel zum umschreiben von URL'S 
+ # - ^ Zielkomplex nach oben = Regulärer Ausdruck markiert Anfang eines Strings
+ # - index.php = das Ziel der Umleitung
+ # - QSA = Query String Append => das Ursprüngliche URL, alles was nach Fragezeichen kommt, an neue URL angehängt wird z.B. bei get-Parameter durch Umleitung
+ # -> letzte Bedingung die auseführt wird, wenn die Bedingung zutrifft
+ 
+ 
+RewriteEngine On 
+RewriteCond %{REQUEST_FILENAME} !-f  
+RewriteCond %{REQUEST_FILENAME} !-d 
+RewriteRule ^ index.php [QSA,L] 
+
